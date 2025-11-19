@@ -17,5 +17,12 @@ router.get(
   authorize(3),
   controller.getTeamById
 );
+router.put("/team", authMiddleware, authorize(3), controller.updateTeam);
+router.delete(
+  "/team/:teamId",
+  authMiddleware,
+  authorize(3),
+  controller.deleteTeam
+);
 
 module.exports = router;
