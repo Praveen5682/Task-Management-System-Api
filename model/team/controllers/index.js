@@ -1,4 +1,4 @@
-const teamValidation = require("../authValidator");
+const { teamValidation, getTeamByIdValidation } = require("../authValidator");
 const service = require("../service/index");
 
 module.exports.createTeam = async (req, res) => {
@@ -60,8 +60,19 @@ module.exports.getTeams = async (req, res) => {
 
 module.exports.getTeamById = async (req, res) => {
   const teamId = req.params.teamId;
+
   console.log("teamId", teamId);
+
   try {
+    const { error } = getTeamByIdValidation.validate({ teamId });
+
+    if (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+
     const response = await service.getTeamById(teamId);
 
     if (response.error) {
@@ -74,6 +85,7 @@ module.exports.getTeamById = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: response.message,
+      data: response.data,
     });
   } catch (err) {
     return res.status(500).json({

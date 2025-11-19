@@ -59,10 +59,25 @@ module.exports.getTeams = async () => {
 module.exports.getTeamById = async (props) => {
   const teamId = props;
   try {
+    if (!teamId) {
+      return {
+        error: "Team Id Is Required",
+      };
+    }
 
+    const teamFromDb = await team.findById(teamId);
 
-    
+    if (!teamFromDb) {
+      return { error: `No data is available for : ${teamId}` };
+    }
 
-
-  } catch (error) {}
+    return {
+      message: `Data fetched successFully for : ${teamId}`,
+      data: teamFromDb,
+    };
+  } catch (error) {
+    return {
+      message: error.message,
+    };
+  }
 };

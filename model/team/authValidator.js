@@ -20,10 +20,10 @@ const teamValidation = Joi.object({
 });
 
 const getTeamByIdValidation = Joi.object({
-  teamId: Joi.number().required().messages({
+  teamId: Joi.string().required().messages({
     "number.base": "TeamId must be a number",
     "number.empty": "TeamId cannot be empty",
   }),
 });
 
-module.exports = teamValidation;
+module.exports = { teamValidation, getTeamByIdValidation };
