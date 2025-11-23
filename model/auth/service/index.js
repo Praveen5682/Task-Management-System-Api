@@ -61,6 +61,7 @@ module.exports.Login = async (props = {}) => {
         id: checkUser._id,
         email: checkUser.email,
         role: checkUser.role,
+        teamId: checkUser.teamId,
       },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }

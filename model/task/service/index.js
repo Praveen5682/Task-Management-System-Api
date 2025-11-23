@@ -38,3 +38,34 @@ module.exports.createTask = async (props = {}) => {
     return { error: error.message };
   }
 };
+
+module.exports.getAllTasks = async (user) => {
+  try {
+    let tasksData;
+
+    if (user.role === 1) {
+      tasksData = await task.find();
+    }
+    // if (user.role === 2) {
+    //   tasksData = await task.find();
+    // }
+    else {
+      tasksData = await task.find();
+    }
+
+    if (tasksData.length === 0) {
+      return {
+        error: "There is no task data ",
+      };
+    }
+
+    return {
+      message: "Task fetched successfully",
+      data: tasksData,
+    };
+  } catch (error) {
+    return {
+      error: error.message,
+    };
+  }
+};
