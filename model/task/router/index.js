@@ -10,4 +10,20 @@ router.post("/task", authMiddleware, authorize(3), controller.createTask);
 // Get All Tasks
 router.get("/tasks", authMiddleware, authorize(3), controller.getAllTasks);
 
+// Update Task
+router.put(
+  "/task/:taskid",
+  authMiddleware,
+  authorize(3),
+  controller.updateTask
+);
+
+// Delete Task
+router.delete(
+  "/task/:taskid",
+  authMiddleware,
+  authorize(3),
+  controller.deleteTask
+);
+
 module.exports = router;

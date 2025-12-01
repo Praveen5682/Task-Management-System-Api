@@ -69,3 +69,70 @@ module.exports.getAllTasks = async (user) => {
     };
   }
 };
+
+module.exports.updateTask = async (props = {}, taskId) => {
+  const {
+    title,
+    description,
+    status,
+    priority,
+    assignedTo,
+    teamId,
+    createdBy,
+    dueDate,
+  } = props;
+
+  try {
+    const existingTask = await task.findById(taskId);
+
+    if (!existingTask) {
+      return {
+        error: "Task not found",
+      };
+    }
+
+    const updateData = {
+      title,
+      description,
+      status,
+      priority,
+      assignedTo,
+      teamId,
+      createdBy,
+      dueDate,
+    };
+
+    const updated = await task.findByIdAndUpdate(taskId, updateData, {
+      new: true,
+      runValidators: true,
+    });
+
+    return {
+      message: "Task updated successFully",
+      data: updated,
+    };
+  } catch (error) {
+    return { error: error.message };
+  }
+};
+
+module.exports.deleteTask = async (taskId) => {
+  try {
+    const checkTask = await task.findById(taskId);
+
+    if (!checkTask) {
+      return {
+        error: "No task found for this Task Id",
+      };
+    }
+
+    const deleted = await task.findByIdAndDelete(taskId);
+
+    return {
+      message: "Task deleted successfully",
+      data: deleted,
+    };
+  } catch (error) {
+    return { error: error.message };
+  }
+};
