@@ -3,6 +3,7 @@ require("dotenv").config();
 const dbConnection = require("./config/db");
 const routes = require("./routes");
 const authMiddleware = require("./middlewares/authMiddleware");
+const cors = require("cors");
 
 dbConnection();
 
@@ -13,6 +14,13 @@ const port = process.env.PORT || 8000;
 // Middlewares
 
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+  })
+);
+
 app.use("/api/v1", routes);
 
 app.get("/", (req, res) => {

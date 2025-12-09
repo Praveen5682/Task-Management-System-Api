@@ -32,10 +32,10 @@ const loginValidation = Joi.object({
     "string.base": "Password must be in string",
     "string.empty": "Password cannot be empty",
   }),
-  role: Joi.number().required().valid(1, 2, 3).default(3).messages({
-    "any.only": "Role must be 1 (admin), 2 (team-leader), or 3 (user)",
-    "any.required": "Role is required",
-  }),
+  // role: Joi.number().required().valid(1, 2, 3).default(3).messages({
+  //   "any.only": "Role must be 1 (admin), 2 (team-leader), or 3 (user)",
+  //   "any.required": "Role is required",
+  // }),
 });
 
 module.exports = { registerationValidation, loginValidation };

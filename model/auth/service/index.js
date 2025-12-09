@@ -37,14 +37,10 @@ module.exports.Registration = async (props = {}) => {
 };
 
 module.exports.Login = async (props = {}) => {
-  const { email, password, role } = props;
+  const { email, password } = props;
 
   try {
-    if (!email || !password || !role) {
-      return { error: "Fields are Required" };
-    }
-
-    const checkUser = await user.findOne({ email, role });
+    const checkUser = await user.findOne({ email });
 
     if (!checkUser) {
       return { error: "User not found with this email and role" };
