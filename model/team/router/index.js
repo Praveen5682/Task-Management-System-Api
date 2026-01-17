@@ -7,21 +7,21 @@ const authMiddleware = require("../../../middlewares/authMiddleware");
 router.post(
   "/create-team",
   authMiddleware,
-  authorize(3),
+  authorize(1),
   controller.createTeam
 );
-router.get("/teams", authMiddleware, authorize(3), controller.getTeams);
+router.get("/teams", authMiddleware, authorize(1), controller.getTeams);
 router.get(
   "/team/:teamId",
   authMiddleware,
-  authorize(3),
+  authorize(1),
   controller.getTeamById
 );
-router.put("/team", authMiddleware, authorize(3), controller.updateTeam);
+router.put("/team", authMiddleware, authorize(1), controller.updateTeam);
 router.delete(
   "/team/:teamId",
   authMiddleware,
-  authorize(3),
+  authorize(1),
   controller.deleteTeam
 );
 

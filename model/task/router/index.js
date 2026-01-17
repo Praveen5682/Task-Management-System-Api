@@ -5,16 +5,16 @@ const authorize = require("../../../middlewares/roleMiddleware");
 const authMiddleware = require("../../../middlewares/authMiddleware");
 
 // Create
-router.post("/task", authMiddleware, authorize(3), controller.createTask);
+router.post("/task", authMiddleware, authorize(1), controller.createTask);
 
 // Get All Tasks
-router.get("/tasks", authMiddleware, authorize(3), controller.getAllTasks);
+router.get("/tasks", authMiddleware, authorize(1), controller.getAllTasks);
 
 // Update Task
 router.put(
   "/task/:taskid",
   authMiddleware,
-  authorize(3),
+  authorize(1),
   controller.updateTask
 );
 
@@ -22,7 +22,7 @@ router.put(
 router.delete(
   "/task/:taskid",
   authMiddleware,
-  authorize(3),
+  authorize(1),
   controller.deleteTask
 );
 

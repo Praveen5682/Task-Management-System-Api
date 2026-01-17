@@ -43,7 +43,7 @@ module.exports.Login = async (props = {}) => {
     const checkUser = await user.findOne({ email });
 
     if (!checkUser) {
-      return { error: "User not found with this email and role" };
+      return { error: "User not found with this email" };
     }
 
     const isMatch = await bcrypt.compare(password, checkUser.password);
@@ -55,6 +55,7 @@ module.exports.Login = async (props = {}) => {
     const token = jwt.sign(
       {
         id: checkUser._id,
+        name: checkUser.name,
         email: checkUser.email,
         role: checkUser.role,
       },
