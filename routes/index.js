@@ -14,4 +14,7 @@ router.use("/task", require("../model/task/router/index"));
 // User
 router.use("/users", require("../model/users/router/index"));
 
+// Projects
+router.use("/project", require("../model/projects/router/index"));
+
 module.exports = router;
